@@ -22,9 +22,15 @@ async.parallel([
 
 });
 
+function writeLog() {
+    
+}
+
 function delayedWrite(pin, value, callback) {
     setTimeout(function () {
-        gpio.write(pin, value, callback);
+        gpio.write(pin, value, () => {
+          callback({pin, value})
+        });
     }, 500);
 }
 
