@@ -17,19 +17,17 @@ async.parallel([
         gpio.setup(16, gpio.DIR_OUT, callback)
     }
 ], function (err, results) {
-
-    delayedWrite()
-
+    delayedWrite(4, 1, log)
 });
 
-function writeLog() {
-    
+function writeLog({pin, value}) {
+    console.log(`${pin} set to ${value}`);
 }
 
 function delayedWrite(pin, value, callback) {
     setTimeout(function () {
         gpio.write(pin, value, () => {
-          callback({pin, value})
+            callback({pin, value})
         });
     }, 500);
 }
